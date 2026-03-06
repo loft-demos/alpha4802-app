@@ -22,8 +22,7 @@ spec:
     - kind: DevPodWorkspaceTemplate
       group: storage.loft.sh
       name: '*'
-  requireTemplate:
-    disabled: true
+  requireTemplate: {}
   members:
     - kind: User
       group: storage.loft.sh
