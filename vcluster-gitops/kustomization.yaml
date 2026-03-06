@@ -11,6 +11,7 @@ resources:
 - projects/api-framework.yaml
 - projects/auth-core.yaml
 - projects/default.yaml
+- projects/test.yaml
 - project-secrets/project-secrets.yaml
 - project-secrets/loft-demo-org-cred.yaml
 - project-secrets/argocd-notifications-secret.yaml
