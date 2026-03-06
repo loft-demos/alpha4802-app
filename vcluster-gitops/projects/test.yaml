@@ -1,0 +1,57 @@
+kind: Project
+apiVersion: management.loft.sh/v1
+metadata:
+  name: test
+spec:
+  displayName: Test Project
+  description: This is a project to test the new namspaceTemplate feature.
+  namespaceTemplate:
+    metadata:
+      labels:
+        vcluster.demo.dev/application: 'privileged'
+        app: vcluster-platform
+      annotations:
+        vcluster.demo.dev/productCode: prd001
+  quotas: {}
+  allowedClusters:
+    - name: '*'
+  allowedRunners:
+    - name: '*'
+  allowedTemplates:
+    - kind: SpaceTemplate
+      group: storage.loft.sh
+      name: '*'
+    - kind: VirtualClusterTemplate
+      group: storage.loft.sh
+      name: '*'
+    - kind: DevPodWorkspaceTemplate
+      group: storage.loft.sh
+      name: '*'
+  requireTemplate: {}
+  members:
+    - kind: User
+      group: storage.loft.sh
+      name: '*'
+      clusterRole: loft-management-project-user
+    - kind: Team
+      group: storage.loft.sh
+      clusterRole: loft-management-project-admin
+      name: loft-admins
+  access:
+    - name: loft-access
+      verbs:
+        - get
+      subresources:
+        - members
+        - clusters
+        - templates
+        - nodetypes
+        - chartinfo
+        - charts
+        - runners
+      users:
+        - '*'
+  argoCD:
+    cluster: loft-cluster
+    namespace: argocd
+    enabled: false
