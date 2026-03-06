@@ -7,6 +7,10 @@ metadata:
 spec:
   displayName: Default Project
   description: This is the default project
+  namespaceTemplate:
+    metadata:
+      labels:
+        vcluster.demo: 'true'
   quotas: {}
   allowedClusters:
     - name: '*'
