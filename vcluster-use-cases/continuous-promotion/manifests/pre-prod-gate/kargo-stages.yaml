@@ -37,11 +37,11 @@ spec:
             apps:
               - name: guestbook-stage
                 sources:
-                  - repoURL: '{REPLACE_GIT_BASE_URL}/{REPLACE_ORG_NAME}/{REPLACE_REPO_NAME}'
+                  - repoURL: 'https://github.com/loft-demos/alpha4802-app'
                     kustomize:
                       images:
-                        - repoURL: '{REPLACE_IMAGE_REPOSITORY_PREFIX}/{REPLACE_REPO_NAME}-demo-app'
-                          tag: '${{ imageFrom("{REPLACE_IMAGE_REPOSITORY_PREFIX}/{REPLACE_REPO_NAME}-demo-app").Tag }}'
+                        - repoURL: 'ghcr.io/loft-demos/alpha4802-app-demo-app'
+                          tag: '${{ imageFrom("ghcr.io/loft-demos/alpha4802-app-demo-app").Tag }}'
 ---
 # pre-prod-vcluster: promotes from stage; deploys into the pre-prod vCluster.
 # The vCluster scales to zero when idle and wakes automatically when Kargo promotes.
@@ -66,9 +66,9 @@ spec:
       - name: integration-test
     args:
       - name: app-url
-        value: "https://guestbook-pre-prod.{REPLACE_BASE_DOMAIN}"
+        value: "https://guestbook-pre-prod.us.demo.dev"
       - name: image-tag
-        value: '${{ imageFrom("{REPLACE_IMAGE_REPOSITORY_PREFIX}/{REPLACE_REPO_NAME}-demo-app").Tag }}'
+        value: '${{ imageFrom("ghcr.io/loft-demos/alpha4802-app-demo-app").Tag }}'
   promotionTemplate:
     spec:
       steps:
@@ -77,11 +77,11 @@ spec:
             apps:
               - name: guestbook-pre-prod
                 sources:
-                  - repoURL: '{REPLACE_GIT_BASE_URL}/{REPLACE_ORG_NAME}/{REPLACE_REPO_NAME}'
+                  - repoURL: 'https://github.com/loft-demos/alpha4802-app'
                     kustomize:
                       images:
-                        - repoURL: '{REPLACE_IMAGE_REPOSITORY_PREFIX}/{REPLACE_REPO_NAME}-demo-app'
-                          tag: '${{ imageFrom("{REPLACE_IMAGE_REPOSITORY_PREFIX}/{REPLACE_REPO_NAME}-demo-app").Tag }}'
+                        - repoURL: 'ghcr.io/loft-demos/alpha4802-app-demo-app'
+                          tag: '${{ imageFrom("ghcr.io/loft-demos/alpha4802-app-demo-app").Tag }}'
 ---
 # prod: requires manual approval in Kargo UI; only eligible after pre-prod tests pass.
 # Soak time ensures freight has been running in pre-prod for at least 10 minutes.
@@ -109,8 +109,8 @@ spec:
             apps:
               - name: guestbook-prod-ppg
                 sources:
-                  - repoURL: '{REPLACE_GIT_BASE_URL}/{REPLACE_ORG_NAME}/{REPLACE_REPO_NAME}'
+                  - repoURL: 'https://github.com/loft-demos/alpha4802-app'
                     kustomize:
                       images:
-                        - repoURL: '{REPLACE_IMAGE_REPOSITORY_PREFIX}/{REPLACE_REPO_NAME}-demo-app'
-                          tag: '${{ imageFrom("{REPLACE_IMAGE_REPOSITORY_PREFIX}/{REPLACE_REPO_NAME}-demo-app").Tag }}'
+                        - repoURL: 'ghcr.io/loft-demos/alpha4802-app-demo-app'
+                          tag: '${{ imageFrom("ghcr.io/loft-demos/alpha4802-app-demo-app").Tag }}'

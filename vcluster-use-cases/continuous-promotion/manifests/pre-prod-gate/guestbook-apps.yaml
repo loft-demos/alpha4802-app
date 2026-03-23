@@ -20,7 +20,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: '{REPLACE_GIT_BASE_URL}/{REPLACE_ORG_NAME}/{REPLACE_REPO_NAME}'
+    repoURL: 'https://github.com/loft-demos/alpha4802-app'
     targetRevision: HEAD
     path: vcluster-use-cases/continuous-promotion/guestbook/stages/ppg-stage
   destination:
@@ -46,7 +46,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: '{REPLACE_GIT_BASE_URL}/{REPLACE_ORG_NAME}/{REPLACE_REPO_NAME}'
+    repoURL: 'https://github.com/loft-demos/alpha4802-app'
     targetRevision: HEAD
     path: vcluster-use-cases/continuous-promotion/guestbook/stages/pre-prod
   destination:
@@ -73,7 +73,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: '{REPLACE_GIT_BASE_URL}/{REPLACE_ORG_NAME}/{REPLACE_REPO_NAME}'
+    repoURL: 'https://github.com/loft-demos/alpha4802-app'
     targetRevision: HEAD
     path: vcluster-use-cases/continuous-promotion/guestbook/stages/prod
   destination:

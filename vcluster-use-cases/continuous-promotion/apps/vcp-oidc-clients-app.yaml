@@ -17,7 +17,7 @@ spec:
     namespace: vcluster-platform
   project: default
   source:
-    repoURL: '{REPLACE_GIT_BASE_URL}/{REPLACE_ORG_NAME}/{REPLACE_REPO_NAME}'
+    repoURL: 'https://github.com/loft-demos/alpha4802-app'
     targetRevision: HEAD
     path: vcluster-use-cases/continuous-promotion/manifests/vcp-oidc-clients
   syncPolicy:

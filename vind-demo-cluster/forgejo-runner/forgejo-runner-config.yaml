@@ -13,10 +13,10 @@ data:
       labels:
         # This image keeps Node.js plus the Docker CLI together so workflows
         # can skip the per-job apt-get install that made local Forgejo builds slow.
-        - docker:docker://{REPLACE_IMAGE_REPOSITORY_PREFIX}/{REPLACE_REPO_NAME}-forgejo-runner-job:{REPLACE_RUNNER_JOB_IMAGE_TAG}
-        - ubuntu-latest:docker://{REPLACE_IMAGE_REPOSITORY_PREFIX}/{REPLACE_REPO_NAME}-forgejo-runner-job:{REPLACE_RUNNER_JOB_IMAGE_TAG}
-        - ubuntu-22.04:docker://{REPLACE_IMAGE_REPOSITORY_PREFIX}/{REPLACE_REPO_NAME}-forgejo-runner-job:{REPLACE_RUNNER_JOB_IMAGE_TAG}
-        - ubuntu-20.04:docker://{REPLACE_IMAGE_REPOSITORY_PREFIX}/{REPLACE_REPO_NAME}-forgejo-runner-job:{REPLACE_RUNNER_JOB_IMAGE_TAG}
+        - docker:docker://ghcr.io/loft-demos/alpha4802-app-forgejo-runner-job:6782f340
+        - ubuntu-latest:docker://ghcr.io/loft-demos/alpha4802-app-forgejo-runner-job:6782f340
+        - ubuntu-22.04:docker://ghcr.io/loft-demos/alpha4802-app-forgejo-runner-job:6782f340
+        - ubuntu-20.04:docker://ghcr.io/loft-demos/alpha4802-app-forgejo-runner-job:6782f340
       envs:
         DOCKER_HOST: unix:///var/run/docker.sock
       timeout: 3h

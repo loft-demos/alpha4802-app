@@ -23,7 +23,7 @@ spec:
       values: |
         api:
           # Domain only — no protocol prefix
-          host: kargo.{REPLACE_BASE_DOMAIN}
+          host: kargo.us.demo.dev
 
           adminAccount:
             enabled: true
@@ -34,14 +34,14 @@ spec:
 
           argocd:
             urls:
-              "": "https://argocd.{REPLACE_BASE_DOMAIN}"
+              "": "https://argocd.us.demo.dev"
 
           oidc:
             enabled: true
             # issuerURL points at the Dex sidecar, which brokers to vCP.
             # Dex handles the client secret and self-signed TLS cert so Kargo
             # does not need a clientSecret field or a TLS skip flag.
-            issuerURL: "https://kargo.{REPLACE_BASE_DOMAIN}/dex"
+            issuerURL: "https://kargo.us.demo.dev/dex"
             clientID: "kargo"
             additionalScopes:
               - email
@@ -59,11 +59,11 @@ spec:
                   id: vcp
                   name: vCluster Platform
                   config:
-                    issuer: "https://{REPLACE_BASE_DOMAIN}/oidc"
+                    issuer: "https://us.demo.dev/oidc"
                     clientID: "kargo"
                     clientSecret: "{REPLACE_KARGO_OIDC_SECRET}"
                     insecureSkipVerify: true
-                    redirectURI: "https://kargo.{REPLACE_BASE_DOMAIN}/dex/callback"
+                    redirectURI: "https://kargo.us.demo.dev/dex/callback"
 
           # TLS terminated by nginx ingress — disable pod-level TLS but tell
           # Kargo to still generate https:// URLs

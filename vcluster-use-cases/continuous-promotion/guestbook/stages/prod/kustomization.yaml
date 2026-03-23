@@ -9,4 +9,4 @@ patches:
     patch: |-
       - op: replace
         path: /spec/rules/0/host
-        value: guestbook-prod.{REPLACE_BASE_DOMAIN}
+        value: guestbook-prod.us.demo.dev
