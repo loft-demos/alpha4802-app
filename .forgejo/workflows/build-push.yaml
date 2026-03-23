@@ -1,0 +1,49 @@
+name: build-push-main
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'helm-chart/**'
+
+concurrency:
+  group: build-push
+  cancel-in-progress: false
+
+jobs:
+  build-push:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read appVersion from Helm chart
+        run: |
+          APP_VERSION="$(sed -n 's/^appVersion:[[:space:]]*//p' helm-chart/Chart.yaml | head -n1 | tr -d "\"'[:space:]")"
+          if [[ -z "$APP_VERSION" ]]; then
+            echo "ERROR: could not read appVersion from helm-chart/Chart.yaml" >&2
+            exit 1
+          fi
+          echo "APP_VERSION=$APP_VERSION" >> "$GITHUB_ENV"
+
+      - name: Build image
+        run: |
+          docker build \
+            --label "org.opencontainers.image.revision=$GITHUB_SHA" \
+            -t "$IMAGE_BASE:$APP_VERSION" \
+            -t "$IMAGE_BASE:latest" \
+            ./src
+        env:
+          IMAGE_BASE: '{REPLACE_IMAGE_REPOSITORY_PREFIX}/{REPLACE_REPO_NAME}-demo-app'
+
+      - name: Log in to Forgejo Container Registry and push
+        run: |
+          echo "$FORGEJO_TOKEN" | docker login '{REPLACE_FORGEJO_HOST}' \
+            --username "$GITHUB_ACTOR" --password-stdin
+          docker push "$IMAGE_BASE:$APP_VERSION"
+          docker push "$IMAGE_BASE:latest"
+        env:
+          FORGEJO_TOKEN: ${{ secrets.GITEA_TOKEN }}
+          IMAGE_BASE: '{REPLACE_IMAGE_REPOSITORY_PREFIX}/{REPLACE_REPO_NAME}-demo-app'
